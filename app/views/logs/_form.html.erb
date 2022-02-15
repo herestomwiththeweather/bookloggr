@@ -1,0 +1,42 @@
+<%= form_with(model: log) do |form| %>
+  <% if log.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(log.errors.count, "error") %> prohibited this log from being saved:</h2>
+
+      <ul>
+        <% log.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :status, style: "display: block" %>
+    <%= form.text_field :status %>
+  </div>
+
+  <div>
+    <%= form.label :note, style: "display: block" %>
+    <%= form.text_field :note %>
+  </div>
+
+  <div>
+    <%= form.label :page, style: "display: block" %>
+    <%= form.number_field :page %>
+  </div>
+
+  <div>
+    <%= form.label :user_id, style: "display: block" %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div>
+    <%= form.label :book_id, style: "display: block" %>
+    <%= form.text_field :book_id %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
