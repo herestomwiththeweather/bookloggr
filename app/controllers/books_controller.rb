@@ -1,9 +1,13 @@
 class BooksController < ApplicationController
+  before_action :login_required, except: [:home]
   before_action :set_book, only: %i[ show edit update destroy ]
+
+  def home
+  end
 
   # GET /books or /books.json
   def index
-    @books = Book.all
+    @books = current_user.books
   end
 
   # GET /books/1 or /books/1.json
@@ -22,6 +26,7 @@ class BooksController < ApplicationController
   # POST /books or /books.json
   def create
     @book = Book.new(book_params)
+    @book.user = current_user
 
     respond_to do |format|
       if @book.save
@@ -65,6 +70,6 @@ class BooksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def book_params
-      params.require(:book).permit(:title, :author, :isbn, :public, :user_id)
+      params.require(:book).permit(:title, :author, :isbn, :public)
     end
 end
