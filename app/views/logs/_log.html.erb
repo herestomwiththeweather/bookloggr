@@ -1,27 +1,6 @@
 <div id="<%= dom_id log %>">
   <p>
-    <strong>Status:</strong>
-    <%= log.status %>
-  </p>
-
-  <p>
     <strong>Note:</strong>
-    <%= log.note %>
+    <%= log.page %> : <%= log.note %> (<%= log.status %>)
   </p>
-
-  <p>
-    <strong>Page:</strong>
-    <%= log.page %>
-  </p>
-
-  <p>
-    <strong>User:</strong>
-    <%= log.user_id %>
-  </p>
-
-  <p>
-    <strong>Book:</strong>
-    <%= log.book_id %>
-  </p>
-
 </div>

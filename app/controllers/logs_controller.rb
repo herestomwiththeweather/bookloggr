@@ -1,4 +1,5 @@
 class LogsController < ApplicationController
+  before_action :login_required
   before_action :set_log, only: %i[ show edit update destroy ]
 
   # GET /logs or /logs.json
@@ -10,26 +11,21 @@ class LogsController < ApplicationController
   def show
   end
 
-  # GET /logs/new
-  def new
-    @log = Log.new
-  end
-
   # GET /logs/1/edit
   def edit
   end
 
   # POST /logs or /logs.json
   def create
-    @log = Log.new(log_params)
+    @book = Book.find(params[:book_id])
+    @log = @book.logs.build(log_params)
+    @log.user = current_user
 
     respond_to do |format|
       if @log.save
-        format.html { redirect_to log_url(@log), notice: "Log was successfully created." }
-        format.json { render :show, status: :created, location: @log }
+        format.html { render(partial: 'logs/list', locals: { book: @book }) }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @log.errors, status: :unprocessable_entity }
+        # XXX
       end
     end
   end

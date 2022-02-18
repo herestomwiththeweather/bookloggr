@@ -1,0 +1,15 @@
+<%= turbo_frame_tag('book-logs') do %>
+<section>
+  <div>Logs</div>
+  <div id="no-logs">
+    <% if book.logs.empty? %>
+      No logs yet
+    <% end %>
+  </div>
+  <div id="logs-list">
+    <% book.logs.each do |log| %>
+      <%= render log %>
+    <% end %>
+  </div>
+</section>
+<% end %>

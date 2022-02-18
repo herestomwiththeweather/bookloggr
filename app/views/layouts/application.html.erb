@@ -11,6 +11,14 @@
   </head>
 
   <body>
+    <div id="user_nav">
+    <% if current_user %>
+      <a href="<%= current_user.url %>"><%= current_user.url %></a> |
+      <a href="/logout">Logout</a>
+    <% else %>
+      <a href="/login">Login</a>
+    <% end %>
+    </div>
     <%= yield %>
   </body>
 </html>
