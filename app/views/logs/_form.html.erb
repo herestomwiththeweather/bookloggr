@@ -1,7 +1,7 @@
 <%= form_with(model: [book, book.logs.build], data: {'turbo-frame': 'book-logs'}) do |form| %>
   <div>
     <%= form.label :status, style: "display: block" %>
-    <%= form.text_field :status %>
+    <%= form.select :status, Log::STATUS_TEXT %>
   </div>
 
   <div>

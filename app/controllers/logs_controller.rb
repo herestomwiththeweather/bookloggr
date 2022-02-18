@@ -19,6 +19,8 @@ class LogsController < ApplicationController
   def create
     @book = Book.find(params[:book_id])
     @log = @book.logs.build(log_params)
+    @log.micropub_endpoint = session[:micropub_endpoint]
+    @log.access_token = session[:access_token]
     @log.user = current_user
 
     respond_to do |format|

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_02_15_220554) do
+ActiveRecord::Schema[7.0].define(version: 2022_02_18_051236) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -33,6 +33,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_15_220554) do
     t.bigint "book_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "micropub_post_url", default: ""
     t.index ["book_id"], name: "index_logs_on_book_id"
     t.index ["user_id"], name: "index_logs_on_user_id"
   end
