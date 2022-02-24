@@ -8,15 +8,20 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+<style>
+div#books {
+  border: 0px solid red;
+}
+</style>
   </head>
 
   <body>
     <div id="user_nav">
     <% if current_user %>
-      <a href="<%= current_user.url %>"><%= current_user.url %></a> |
-      <a href="/logout">Logout</a>
+      <span class="mr-3"><a href="<%= current_user.url %>"><%= current_user.url %></a></span> |
+      <button class="ml-3 mt-1 py-1 px-2 rounded-lg border-2 bg-blue-600 border-blue-700 hover:bg-blue-100 hover:text-blue-600 text-blue-100 transition-colors duration-300"><a href="/logout">Logout</a></button>
     <% else %>
-      <a href="/login">Login</a>
+      <h1 class="mx-2 my-3 text-2xl text-gray-700 font-bold"><a href="/login">Login</a></h1>
     <% end %>
     </div>
     <%= yield %>

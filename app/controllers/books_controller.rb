@@ -3,6 +3,7 @@ class BooksController < ApplicationController
   before_action :set_book, only: %i[ show edit update destroy ]
 
   def home
+    redirect_to books_url if current_user
   end
 
   # GET /books or /books.json

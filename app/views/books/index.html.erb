@@ -1,14 +1,11 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Books</h1>
+<h1 class="my-3 text-2xl text-gray-700 font-bold">Books</h1>
 
-<div id="books">
+<div id="books" class="px-3">
   <% @books.each do |book| %>
     <%= render book %>
-    <p>
-      <%= link_to "Show this book", book %>
-    </p>
   <% end %>
 </div>
 
-<%= link_to "New book", new_book_path %>
+<button class="py-1 px-2 bg-blue-600 border-2 border-blue-700 hover:bg-blue-100 hover:text-blue-600 rounded-lg mx-10 text-blue-100 transition-colors duration-300"><%= link_to "New book", new_book_path %></button>

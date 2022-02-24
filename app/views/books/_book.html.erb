@@ -1,21 +1,9 @@
-<div id="<%= dom_id book %>">
-  <p>
-    <strong>Title:</strong>
-    <%= book.title %>
+<div id="<%= dom_id book %>" class="m-2 px-5">
+  <p class="font-bold">
+    <%= link_to book.title, book %>
   </p>
 
-  <p>
-    <strong>Author:</strong>
-    <%= book.author %>
-  </p>
-
-  <p>
-    <strong>Isbn:</strong>
-    <%= book.isbn %>
-  </p>
-
-  <p>
-    <strong>Public:</strong>
-    <%= book.public %>
+  <p class="text-gray-800">
+    by <%= book.author %>
   </p>
 </div>
