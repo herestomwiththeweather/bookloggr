@@ -2,10 +2,9 @@
 
 <%= render @book %>
 <div class="m-2 px-5">
-  <%= render "logs/list", book: @book %>
-  <%= render "logs/form", book: @book %>
   <%= link_to "Edit this book", edit_book_path(@book) %> |
   <%= link_to "Back to books", books_path %>
+  <%= render "logs/form", book: @book %>
 
-  <%= button_to "Destroy this book", @book, method: :delete %>
+  <%= render "logs/list", book: @book %>
 </div>
