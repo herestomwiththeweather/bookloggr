@@ -11,6 +11,7 @@ class SessionsController < ApplicationController
 
   def create
     Rails.logger.info "me url: #{params[:me]}"
+    session[:me] = URI(params[:me]).normalize.to_s
     discovery_response = IndieWeb::Endpoints.get(params[:me])
     session[:auth_endpoint] = discovery_response[:authorization_endpoint]
     session[:token_endpoint] = discovery_response[:token_endpoint]
@@ -42,11 +43,15 @@ class SessionsController < ApplicationController
           session[:user_id] = user.id
           session[:oauth_state] = nil
           redirect_to books_url
+        else
+          redirect_to login_url, "Authentication failure"
         end
       else
         Rails.logger.info "Error. state #{params[:state]} does not match stored state #{session[:oauth_state]}"
         session[:oauth_state] = nil
       end
+    else
+      redirect_to login_url, notice: "Auth endpoint did not return a code"
     end
 
     respond_to do |format|
@@ -84,8 +89,14 @@ class SessionsController < ApplicationController
     if parsed_response['error'].present?
       Rails.logger.info "Error: parsed response: #{parsed_response['error'].to_s}"
     else
-      session[:access_token] = parsed_response['access_token']
-      me = parsed_response['me']
+      me = URI(parsed_response['me']).normalize.to_s
+      if me != session[:me]
+        Rails.logger.info "get_authenticated_user error. #{me} does not match #{session[:me]}"
+        me = nil
+      else
+        session[:access_token] = parsed_response['access_token']
+        Rails.logger.info "get_authenticated_user success: #{me}"
+      end
     end
     me
   end
