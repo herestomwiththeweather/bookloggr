@@ -1,7 +1,9 @@
 <p style="color: green"><%= notice %></p>
 
 <%= render @book %>
-<iframe src=<%= url_for(@book.main_ebook) %> width="1200" height="1040"></iframe>
+<% if @book.main_ebook.attached? %>
+  <iframe src=<%= url_for(@book.main_ebook) %> width="1200" height="1040"></iframe>
+<% end %>
 <div class="m-2 px-5">
   <%= link_to "Edit this book", edit_book_path(@book) %> |
   <%= link_to "Back to books", books_path %>
