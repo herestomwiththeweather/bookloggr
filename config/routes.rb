@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get '/callback' => 'sessions#callback', as: :callback
 
   resources :books do
-    resources :logs, only: [:index, :create, :update, :destroy]
+    resources :logs, only: [:create, :update, :destroy]
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

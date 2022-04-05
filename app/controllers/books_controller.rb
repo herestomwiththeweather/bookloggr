@@ -1,6 +1,7 @@
 class BooksController < ApplicationController
   before_action :login_required, except: [:home]
-  before_action :set_book, only: %i[ show edit update destroy ]
+
+  load_and_authorize_resource
 
   def home
     redirect_to books_url if current_user
@@ -64,11 +65,6 @@ class BooksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_book
-      @book = Book.find(params[:id])
-    end
-
     # Only allow a list of trusted parameters through.
     def book_params
       params.require(:book).permit(:title, :author, :isbn, :public, :main_ebook)

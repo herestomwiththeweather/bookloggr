@@ -1,11 +1,8 @@
 class LogsController < ApplicationController
   before_action :login_required
-  before_action :set_log, only: %i[ show edit update destroy ]
 
-  # GET /logs or /logs.json
-  def index
-    @logs = Log.all
-  end
+  load_resource :book
+  load_and_authorize_resource :log, through: :book, shallow: true
 
   # GET /logs/1 or /logs/1.json
   def show
@@ -17,8 +14,6 @@ class LogsController < ApplicationController
 
   # POST /logs or /logs.json
   def create
-    @book = Book.find(params[:book_id])
-    @log = @book.logs.build(log_params)
     @log.micropub_endpoint = session[:micropub_endpoint]
     @log.access_token = session[:access_token]
     @log.user = current_user
@@ -56,13 +51,8 @@ class LogsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_log
-      @log = Log.find(params[:id])
-    end
-
     # Only allow a list of trusted parameters through.
     def log_params
-      params.require(:log).permit(:status, :note, :page, :user_id, :book_id)
+      params.require(:log).permit(:status, :note, :page, :book_id)
     end
 end
