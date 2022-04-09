@@ -31,7 +31,7 @@ class LogsController < ApplicationController
   def update
     respond_to do |format|
       if @log.update(log_params)
-        format.html { redirect_to log_url(@log), notice: "Log was successfully updated." }
+        format.html { render(@log) }
         format.json { render :show, status: :ok, location: @log }
       else
         format.html { render :edit, status: :unprocessable_entity }

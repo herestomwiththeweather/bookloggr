@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   get '/logout' => 'sessions#destroy', as: :logout
   get '/callback' => 'sessions#callback', as: :callback
 
-  resources :books do
-    resources :logs, only: [:create, :update, :destroy]
+  resources :books, shallow: true do
+    resources :logs, only: [:create, :edit, :update, :destroy]
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
