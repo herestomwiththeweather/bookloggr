@@ -1,4 +1,5 @@
-<%= form_with(model: @log || [book, book.logs.build], data: {'turbo-frame': 'book-logs'}) do |form| %>
+<% form_data = current_page?(action: 'edit') ? {} : {'turbo-frame': 'book-logs'} %>
+<%= form_with(model: @log || [book, book.logs.build], data: form_data) do |form| %>
   <div>
     <%= form.label :status, style: "display: block" %>
     <%= form.select :status, Log::STATUS_TEXT %>
