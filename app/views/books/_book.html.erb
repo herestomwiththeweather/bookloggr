@@ -1,6 +1,6 @@
 <div id="<%= dom_id book %>" class="m-2 px-5">
   <p class="font-bold">
-    <%= link_to book.title, book %>
+    <%= render 'icon' if book.main_ebook.attached? %> <%= link_to book.title, book %>
   </p>
 
   <p class="text-gray-800">
