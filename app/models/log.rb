@@ -5,6 +5,8 @@ class Log < ApplicationRecord
   belongs_to :user
   belongs_to :book
 
+  default_scope { order(page: :desc) }
+
   attr_accessor :micropub_endpoint
   attr_accessor :access_token
 
