@@ -14,8 +14,6 @@ class LogsController < ApplicationController
 
   # POST /logs or /logs.json
   def create
-    @log.micropub_endpoint = session[:micropub_endpoint]
-    @log.access_token = session[:access_token]
     @log.user = current_user
 
     respond_to do |format|

@@ -1,11 +1,6 @@
 <% form_data = current_page?(action: 'edit') ? {} : {'turbo-frame': 'book-logs'} %>
 <%= form_with(model: @log || [book, book.logs.build], data: form_data) do |form| %>
   <div>
-    <%= form.label :status, style: "display: block" %>
-    <%= form.select :status, Log::STATUS_TEXT %>
-  </div>
-
-  <div>
     <%= form.label :note, style: "display: block" %>
     <%= form.text_field :note %>
   </div>

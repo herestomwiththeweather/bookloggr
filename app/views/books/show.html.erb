@@ -1,12 +1,17 @@
 <p style="color: green"><%= notice %></p>
 
 <%= render @book %>
+<div class="m-2 px-5">
+  <%= link_to "Edit this book", edit_book_path(@book) %> |
+  <%= link_to "Back to books", books_path %>
+  <%= render "posts/form", book: @book %>
+
+  <%= render "posts/list", book: @book %>
+</div>
 <% if @book.main_ebook.attached? %>
   <iframe src=<%= url_for(@book.main_ebook) %> width="1200" height="1040"></iframe>
 <% end %>
 <div class="m-2 px-5">
-  <%= link_to "Edit this book", edit_book_path(@book) %> |
-  <%= link_to "Back to books", books_path %>
   <%= render "logs/form", book: @book %>
 
   <%= render "logs/list", book: @book %>

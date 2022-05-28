@@ -1,0 +1,11 @@
+<%= turbo_frame_tag('book-posts') do %>
+<section>
+  <div id="no-posts">
+  </div>
+  <div id="logs-list">
+    <% book.posts.each do |post| %>
+      <%= render post unless post.id.nil? %>
+    <% end %>
+  </div>
+</section>
+<% end %>

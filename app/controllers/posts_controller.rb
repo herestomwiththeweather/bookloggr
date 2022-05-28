@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_action :login_required
   before_action :set_post, only: %i[ show edit update destroy ]
 
   # GET /posts or /posts.json
@@ -10,26 +11,23 @@ class PostsController < ApplicationController
   def show
   end
 
-  # GET /posts/new
-  def new
-    @post = Post.new
-  end
-
   # GET /posts/1/edit
   def edit
   end
 
   # POST /posts or /posts.json
   def create
-    @post = Post.new(post_params)
+    @book = Book.find(params[:book_id])
+    @post = @book.posts.build(post_params)
+    @post.user = current_user
+    @post.micropub_endpoint = session[:micropub_endpoint]
+    @post.access_token = session[:access_token]
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to post_url(@post), notice: "Post was successfully created." }
-        format.json { render :show, status: :created, location: @post }
+        format.html { render(partial: 'posts/list', locals: { book: @book }) }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
+        # XXX
       end
     end
   end
@@ -65,6 +63,6 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:status, :micropub_post_url, :user_id, :book_id)
+      params.require(:post).permit(:status, :book_id)
     end
 end

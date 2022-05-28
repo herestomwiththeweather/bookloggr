@@ -6,7 +6,7 @@
     <% end %>
   </div>
   <div id="logs-list">
-    <% book.logs.where.not(page: nil).each do |log| %>
+    <% book.logs.each do |log| %>
       <%= render log unless log.id.nil? %>
     <% end %>
   </div>
