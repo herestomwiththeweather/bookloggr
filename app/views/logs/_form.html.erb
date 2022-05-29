@@ -2,12 +2,12 @@
 <%= form_with(model: @log || [book, book.logs.build], data: form_data) do |form| %>
   <div>
     <%= form.label :note, style: "display: block" %>
-    <%= form.text_field :note %>
+    <%= form.text_area :note, style: "width: 500px"%>
   </div>
 
   <div>
     <%= form.label :page, style: "display: block" %>
-    <%= form.number_field :page %>
+    <%= form.number_field :page, style: "width: 80px" %>
   </div>
 
   <div>
