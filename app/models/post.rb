@@ -37,7 +37,7 @@ class Post < ApplicationRecord
       'Content-Type' => 'application/json',
       'Accept' => 'application/json'
     }
-    body = {type:['h-entry'], properties: {'summary': summary, 'read-status': status, 'read-of': read_of}}.to_json
+    body = {type:['h-entry'], properties: {'summary': summary, 'read-status': [status], 'read-of': read_of}}.to_json
     response = http.post(u.path, body, headers)
     Rails.logger.info "micropub_create: #{response.code} : #{response.body}"
     j = JSON.parse(response.body)
