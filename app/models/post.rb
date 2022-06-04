@@ -18,6 +18,7 @@ class Post < ApplicationRecord
     ['Finished', STATUS_FINISHED]
   ].freeze
 
+  validates :status, inclusion: {in: STATUSES}
   after_create :micropub_create
 
   def after_initialize

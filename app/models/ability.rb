@@ -11,5 +11,10 @@ class Ability
     can [:create], Log do |log|
       log.book.user_id == user.id
     end
+
+    can [:read, :destroy], Post, user: user
+    can [:create], Post do |post|
+      post.book.user_id == user.id
+    end
   end
 end

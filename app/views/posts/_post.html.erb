@@ -1,5 +1,5 @@
 <div id="<%= dom_id post %>">
   <p>
-    <%= post.status %> : <%= post.micropub_post_url %>
+    <%= post.status %> : <%= link_to(post.micropub_post_url, post.micropub_post_url) unless post.micropub_post_url.nil? %>
   </p>
 </div>

@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   resources :books, shallow: true do
     resources :logs, only: [:create, :edit, :update, :destroy]
-    resources :posts, only: [:create, :edit, :update, :destroy]
+    resources :posts, only: [:create, :destroy]
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
