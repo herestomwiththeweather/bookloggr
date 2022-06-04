@@ -124,6 +124,7 @@ GEM
       activesupport (>= 5.0.0)
     jsbundling-rails (1.0.0)
       railties (>= 6.0.0)
+    library_stdnums (1.6.0)
     link-header-parser (4.0.0)
     llhttp-ffi (0.4.0)
       ffi-compiler (~> 1.0)
@@ -247,6 +248,7 @@ DEPENDENCIES
   indieweb-endpoints
   jbuilder
   jsbundling-rails
+  library_stdnums
   pdf-reader
   pg (~> 1.1)
   puma (~> 5.0)

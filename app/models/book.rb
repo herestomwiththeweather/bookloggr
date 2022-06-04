@@ -7,7 +7,13 @@ class Book < ApplicationRecord
 
   validates :title, presence: true
   validates :author, presence: true
-  validates :isbn, presence: true, uniqueness: true
+  validates :isbn, presence: true
+
+  before_validation :normalize_isbn, :on => :create
+
+  def normalize_isbn
+    self.isbn = StdNum::ISBN.normalize(isbn)
+  end
 
   def search_pages(text)
     pages = []
