@@ -16,7 +16,7 @@
   </head>
 
   <body>
-    <div id="user_nav">
+    <div id="user_nav" class="px-3">
     <% if current_user %>
       <span class="mr-3"><a href="<%= current_user.url %>"><%= current_user.url %></a></span> |
       <button class="ml-3 mt-1 py-1 px-2 rounded-lg border-2 bg-blue-600 border-blue-700 hover:bg-blue-100 hover:text-blue-600 text-blue-100 transition-colors duration-300"><a href="/logout">Logout</a></button>
