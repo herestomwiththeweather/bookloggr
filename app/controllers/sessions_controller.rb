@@ -31,12 +31,14 @@ class SessionsController < ApplicationController
     session[:token_endpoint] = nil
     session[:micropub_endpoint] = nil
     session[:access_token] = nil
+    session[:oauth_state] = nil
     redirect_to login_url, notice: "Logged out"
   end
 
   def callback
     if params[:code]
       if params[:state] == session[:oauth_state]
+        session[:oauth_state] = nil
         me = get_authenticated_user(params[:code])
         if me.present?
           user = User.find_or_create_by(url: me)
