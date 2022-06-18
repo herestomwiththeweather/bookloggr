@@ -84,9 +84,12 @@ class SessionsController < ApplicationController
     u = URI.parse(token_endpoint)
     http = ::Net::HTTP.new(u.host, u.port)
     http.use_ssl = true
-    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-    body = "code=#{CGI::escape code}&client_id=#{CGI::escape @client_id}&redirect_uri=#{CGI::escape @redirect_uri}"
+    http.verify_mode = OpenSSL::SSL::VERIFY_PEER
+    body = "grant_type=authorization_code&code=#{CGI::escape code}&client_id=#{CGI::escape @client_id}&redirect_uri=#{CGI::escape @redirect_uri}"
     response = http.post(u.path, body, "Content-Type" => "application/x-www-form-urlencoded\r\n", "Accept" => "application/json\r\n")
+    if 200 != response.code
+      Rails.logger.info "Error: response code: #{response.code}"
+    end
     parsed_response = JSON.parse(response.body)
     if parsed_response['error'].present?
       Rails.logger.info "Error: parsed response: #{parsed_response['error'].to_s}"
@@ -101,6 +104,9 @@ class SessionsController < ApplicationController
       end
     end
     me
+  rescue JSON::ParserError => e
+    Rails.logger.info "Error: #{e.message}"
+    nil
   end
 
   def setup_oauth_params
