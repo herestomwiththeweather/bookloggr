@@ -2,15 +2,15 @@
 
 <%= render @book %>
 <div class="m-2 px-5">
+  <% if @book.main_ebook.attached? %>
+    <%= link_to "pdf", @book.main_ebook %> |
+  <% end %>
   <%= link_to "Edit this book", edit_book_path(@book) %> |
   <%= link_to "Back to books", books_path %>
   <%= render "posts/form", book: @book %>
 
   <%= render "posts/list", book: @book %>
 </div>
-<% if @book.main_ebook.attached? %>
-  <iframe src=<%= url_for(@book.main_ebook) %> width="1200" height="1040"></iframe>
-<% end %>
 <div class="m-2 px-5">
   <%= render "logs/form", book: @book %>
 
