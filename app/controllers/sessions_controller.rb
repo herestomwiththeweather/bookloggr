@@ -3,7 +3,7 @@ require 'cgi'
 require 'net/https'
 
 class SessionsController < ApplicationController
-  before_action :setup_oauth_params # for create
+  before_action :setup_oauth_params, only: [:create, :callback]
   skip_before_action :verify_authenticity_token
 
   def new
@@ -85,9 +85,16 @@ class SessionsController < ApplicationController
     http = ::Net::HTTP.new(u.host, u.port)
     http.use_ssl = true
     http.verify_mode = OpenSSL::SSL::VERIFY_PEER
-    body = "grant_type=authorization_code&code=#{CGI::escape code}&client_id=#{CGI::escape @client_id}&redirect_uri=#{CGI::escape @redirect_uri}"
-    response = http.post(u.path, body, "Content-Type" => "application/x-www-form-urlencoded\r\n", "Accept" => "application/json\r\n")
-    if 200 != response.code
+
+    body = {grant_type: 'authorization_code', code: code, client_id: @client_id, redirect_uri: @redirect_uri}
+
+    req = Net::HTTP::Post.new(u.path)
+    req.set_form_data(body)
+    req['Content-Type'] = "application/x-www-form-urlencoded"
+    req['Accept'] = "application/json"
+
+    response = http.request(req)
+    if '200' != response.code
       Rails.logger.info "Error: response code: #{response.code}"
     end
     parsed_response = JSON.parse(response.body)
