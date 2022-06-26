@@ -5,7 +5,7 @@
   <% if @book.main_ebook.attached? %>
     <%= link_to "pdf", @book.main_ebook %> |
   <% end %>
-  <%= link_to "Edit this book", edit_book_path(@book) %> |
+  <%= link_to "Edit book", edit_book_path(@book) %> |
   <%= link_to "Back to books", books_path %>
   <%= render "posts/form", book: @book %>
 
@@ -15,6 +15,9 @@
   <%= render "logs/form", book: @book %>
 
   <%= render "logs/list", book: @book %>
+</div>
+<div class="m-2 px-5">
+  <%= button_to "Delete book", book_path(@book), method: 'delete', data: { controller:  "confirmation", "confirmation-message-value": "Are you sure?", action: "click->confirmation#confirm" }, style: 'text-decoration: underline' %>
 </div>
 <div style="height: 20px">
 </div>

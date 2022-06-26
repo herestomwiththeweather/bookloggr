@@ -4,7 +4,7 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    can [:read, :update], Book, user: user
+    can [:read, :update, :destroy], Book, user: user
     can [:index, :home, :create], Book
 
     can [:read, :update, :destroy], Log, user: user
