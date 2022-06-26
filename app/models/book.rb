@@ -18,7 +18,6 @@ class Book < ApplicationRecord
 
   def delete_attachment
     if main_ebook.attached?
-      Rails.logger.info "XXX deleting attachment"
       main_ebook.purge
     end
   end
