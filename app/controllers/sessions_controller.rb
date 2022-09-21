@@ -46,7 +46,7 @@ class SessionsController < ApplicationController
           session[:oauth_state] = nil
           redirect_to books_url
         else
-          redirect_to login_url, "Authentication failure"
+          redirect_to login_url, notice: "Authentication failure"
         end
       else
         Rails.logger.info "Error. state #{params[:state]} does not match stored state #{session[:oauth_state]}"
