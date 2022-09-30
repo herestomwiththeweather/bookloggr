@@ -41,9 +41,12 @@ class Post < ApplicationRecord
     body = {type:['h-entry'], properties: {'summary': summary, 'read-status': [status], 'read-of': read_of}}.to_json
     response = http.post(u.path, body, headers)
     Rails.logger.info "micropub_create: #{response.code} : #{response.body}"
-    j = JSON.parse(response.body)
     if ['200','201','202'].include?(response.code)
-      self.micropub_post_url = j['url']
+      if response.body.blank?
+        self.micropub_post_url = response['location']
+      else
+        self.micropub_post_url = JSON.parse(response.body)['url']
+      end
       save
     else
       Rails.logger.info 'oops'
