@@ -42,11 +42,7 @@ class Post < ApplicationRecord
     response = http.post(u.path, body, headers)
     Rails.logger.info "micropub_create: #{response.code} : #{response.body}"
     if ['200','201','202'].include?(response.code)
-      if response.body.blank?
-        self.micropub_post_url = response['location']
-      else
-        self.micropub_post_url = JSON.parse(response.body)['url']
-      end
+      self.micropub_post_url = response['location']
       save
     else
       Rails.logger.info 'oops'
