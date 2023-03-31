@@ -1,5 +1,5 @@
 <%= turbo_frame_tag(dom_id(log)) do %>
   <p>
-    <strong><%= log.page %></strong> : <%= log.note %> | <%= link_to "Edit", edit_log_path(log) %>
+    <strong><%= log.page %></strong> : <%= simple_format log.note %> | <%= link_to "Edit", edit_log_path(log) %>
   </p>
 <% end %>
