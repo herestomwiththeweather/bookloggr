@@ -1,0 +1,10 @@
+<%= turbo_frame_tag(dom_id(@log)) do %>
+<div class="flex">
+  <div style="float: left;">
+    <strong><%= @log.page %></strong> : <%= simple_format @log.note %>
+  </div>
+  <div style="margin-left: 30%;">
+    <strong><%= @log.page %></strong> : <%= simple_format @translation.text %> | <%= link_to "Show", log_path(@log) %> | <%= link_to "Edit", edit_log_path(@log) %>
+  </div>
+</div>
+<% end %>

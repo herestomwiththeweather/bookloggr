@@ -8,6 +8,11 @@ class LogsController < ApplicationController
   def show
   end
 
+  def translate
+    @translation = DeepL.translate @log.note, 'FR', 'EN'
+    Rails.logger.info @translation.text
+  end
+
   # GET /logs/1/edit
   def edit
   end

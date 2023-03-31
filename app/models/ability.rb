@@ -7,7 +7,7 @@ class Ability
     can [:read, :update, :destroy], Book, user: user
     can [:index, :home, :create], Book
 
-    can [:read, :update, :destroy], Log, user: user
+    can [:read, :translate, :update, :destroy], Log, user: user
     can [:create], Log do |log|
       log.book.user_id == user.id
     end

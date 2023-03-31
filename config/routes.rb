@@ -6,7 +6,11 @@ Rails.application.routes.draw do
   get '/callback' => 'sessions#callback', as: :callback
 
   resources :books, shallow: true do
-    resources :logs, only: [:create, :edit, :update, :destroy]
+    resources :logs, only: [:show, :create, :edit, :update, :destroy] do
+      member do
+        get :translate
+      end
+    end
     resources :posts, only: [:create, :destroy]
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
