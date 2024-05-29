@@ -155,7 +155,7 @@ GEM
       digest
       net-protocol
       timeout
-    nio4r (2.5.8)
+    nio4r (2.7.3)
     nokogiri (1.13.1-x86_64-linux)
       racc (~> 1.4)
     pdf-reader (2.9.2)
@@ -166,7 +166,7 @@ GEM
       ttfunk
     pg (1.3.2)
     public_suffix (4.0.6)
-    puma (5.6.2)
+    puma (5.6.8)
       nio4r (~> 2.0)
     racc (1.6.0)
     rack (2.2.7)
@@ -251,7 +251,7 @@ DEPENDENCIES
   library_stdnums
   pdf-reader
   pg (~> 1.1)
-  puma (~> 5.0)
+  puma (~> 5.6)
   rails (~> 7.0.2, >= 7.0.2.2)
   sprockets-rails
   stimulus-rails
